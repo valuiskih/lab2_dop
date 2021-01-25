@@ -1,0 +1,96 @@
+// есть 3 ввода: строка; знак-разделитель; слово, которым надо заменить знак.
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+int main(void)
+{
+	printf("Enter string: \n");
+	char str[102];
+	fgets(str, 102, stdin);
+	printf("Enter symbol: \n");
+	char sym[4];
+	fgets(sym, 4, stdin);
+	printf("Enter words: \n");
+	char wr[102];
+	fgets(wr, 102, stdin);
+	char* n_str;
+	int i = 0;
+	int j = 0;
+	int k = 0;
+	int b = 0;
+	int len = 0;
+	int lenght = 0;
+	int l = 0;
+	int abc = 0;
+	int size = 0;
+	if ((str[1] == '\0') || (sym[1] == '\0') || (wr[1] == '\0'))
+	{
+		printf("Error ");
+		return(-1);
+	}
+
+	while (sym[j] != '\0')
+	{
+		lenght++;
+		j++;
+	}
+	j = 0;
+	if (lenght > 2)
+	{
+		printf("\nError: slovo symbol overflowed");
+		return -1;
+	}
+	while (str[i] != '\0')
+	{
+		if (str[i] == sym[j])
+		{
+			abc++;
+		}
+		len++;
+		i++;
+	}
+	if (len > 100)
+	{
+		printf("\nError: string overflowed ");
+		return -1;
+	}
+	while (wr[k] != '\0')
+	{
+		l++;
+		k++;
+	}
+	if (l > 100)
+	{
+		printf("\nError: stroka overflowed");
+		return -1;
+	}
+	size = ((len - 1) - (abc)) + (abc * (l - 1));
+	n_str = (char*)malloc(size * sizeof(char*));
+	for (i = 0; i < size + 1; i++)
+	{
+		if (str[i] == sym[j])
+		{
+			for (k = 0; k < l; k++)
+			{
+				if (wr[k] != '\n')
+				{
+					n_str[b] = wr[k];
+					b++;
+				}
+
+			}
+		}
+		else
+		{
+			n_str[b] = str[i];
+			b++;
+		}
+	}
+	printf("\nNew stroka - ");
+	for (b = 0; b < i - 1; b++)
+	{
+		printf("%c", n_str[b]);
+	}
+	free(n_str);
+	return 0;
+}
